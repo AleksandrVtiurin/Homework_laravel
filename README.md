@@ -56,3 +56,45 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+Перечислите список composer-пакетов, которые использует фреймворк Laravel после установки:
+Основные зависимости (require):
+php ^8.3 - язык программирования
+laravel/framework ^13.0 - ядро фреймворка Laravel
+laravel/tinker ^3.0 - интерактивная оболочка для работы с Laravel
+
+Пакеты для разработки (require-dev):
+fakerphp/faker ^1.23 - генерация тестовых данных
+laravel/pail ^1.2.5 - инструмент для работы с логами
+laravel/pint ^1.27 - форматирование кода (PHP CS Fixer)
+mockery/mockery ^1.6 - библиотека для создания mock-объектов в тестах
+nunomaduro/collision ^8.6 - улучшенный вывод ошибок для консоли
+phpunit/phpunit ^12.5.12 - фреймворк для модульного тестирования
+
+Зависимости, установленные автоматически (через laravel/framework):
+guzzlehttp/guzzle - HTTP-клиент
+symfony/* - компоненты Symfony (консоль, http-foundation, process и др.)
+monolog/monolog - логирование
+doctrine/inflector - преобразование слов во множественное/единственное число
+vlucas/phpdotenv - работа с переменными окружения
+ramsey/uuid - генерация UUID
+nesbot/carbon - работа с датами и временем
+league/flysystem - работа с файловыми системами
+
+Изучите директорию config и опишите какие файлы хранятся в этой директории:
+app.php	Основные настройки приложения: имя, окружение, часовой пояс, провайдеры
+auth.php	Настройки аутентификации: guards, провайдеры, пароли
+cache.php	Настройки кэширования (file, redis, memcached, database)
+database.php	Настройки подключения к БД (MySQL, PostgreSQL, SQLite, SQL Server)
+filesystems.php	Настройки файловых систем (local, public, s3)
+logging.php	Настройки логирования (channels, stack, single, daily)
+mail.php	Настройки отправки почты (SMTP, Mailgun, SES, Postmark)
+queue.php	Настройки очередей (database, redis, sqs, beanstalkd)
+services.php	Настройки сторонних сервисов (Mailgun, Postmark, Stripe)
+session.php	Настройки сессий (file, cookie, database, redis)
+
+В какой директории хранятся основные файлы (классы) с бизнес-логикой приложения?
+Основные файлы (классы) с бизнес-логикой хранятся в директории: app/
