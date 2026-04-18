@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+    <a href="{{ route('groups.index') }}" class="btn">← Назад к списку</a>
+    <a href="{{ route('students.create', $group) }}" class="btn btn-success">+ Добавить студента</a>
+    
+    <h1>Группа: {{ $group->title }}</h1>
+    
+    <h3>Информация о группе</h3>
+    <table>
+        <tr><th>ID</th><td>{{ $group->id }}</td></tr>
+        <tr><th>Название</th><td>{{ $group->title }}</td></tr>
+        <tr><th>Дата начала</th><td>{{ $group->start_from->format('d.m.Y') }}</td></tr>
+        <tr><th>Статус</th><td>{{ $group->is_active ? 'Активна' : 'Не активна' }}</td></tr>
+        <tr><th>Создана</th><td>{{ $group->created_at }}</td></tr>
+        <tr><th>Обновлена</th><td>{{ $group->updated_at }}</td></tr>
+    </table>
+    
+    <h3>Студенты группы ({{ $group->students->count() }})</h3>
+    @if($group->students->count())
+        <table>
+            <thead><tr><th>ID</th><th>Фамилия</th><th>Имя</th><th>Действия</th></tr></thead>
+            <tbody>
+                @foreach($group->students as $student)
+                <tr>
+                    <td>{{ $student->id }}</td>
+                    <td>{{ $student->surname }}</td>
+                    <td>{{ $student->name }}</td>
+                    <td>
+                        <a href="{{ route('students.show', [$group, $student]) }}" class="btn">Просмотр</a>
+                        <a href="{{ route('students.edit', [$group, $student]) }}" class="btn btn-warning">Ред.</a>
+                        <form action="{{ route('students.destroy', [$group, $student]) }}" method="POST" style="display: inline;">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить студента?')">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>В группе пока нет студентов</p>
+    @endif
+@endsection

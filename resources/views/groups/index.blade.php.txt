@@ -1,0 +1,37 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="nav">
+        <a href="{{ route('groups.create') }}" class="btn btn-success">+ Создать новую группу</a>
+    </div>
+    
+    <h1>Список групп</h1>
+    
+    @if($groups->count())
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Название</th><th>Дата начала</th><th>Статус</th><th>Студентов</th><th>Действия</th></tr>
+            </thead>
+            <tbody>
+                @foreach($groups as $group)
+                <tr>
+                    <td>{{ $group->id }}</td>
+                    <td><a href="{{ route('groups.show', $group) }}">{{ $group->title }}</a></td>
+                    <td>{{ $group->start_from->format('d.m.Y') }}</td>
+                    <td>{{ $group->is_active ? 'Активна' : 'Не активна' }}</td>
+                    <td>{{ $group->students->count() }}</td>
+                    <td>
+                        <a href="{{ route('groups.edit', $group) }}" class="btn btn-warning">Ред.</a>
+                        <form action="{{ route('groups.destroy', $group) }}" method="POST" style="display: inline;">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить группу?')">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>Группы не найдены</p>
+    @endif
+@endsection
